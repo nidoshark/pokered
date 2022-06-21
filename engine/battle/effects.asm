@@ -98,10 +98,13 @@ PoisonEffect:
 	jr z, .noEffect
 	ld a, [de]
 	cp POISON_SIDE_EFFECT1
-	ld b, 20 percent + 1 ; chance of poisoning
+	ld b, 30 percent + 1 ; chance of poisoning (Poison Sting)
 	jr z, .sideEffectTest
 	cp POISON_SIDE_EFFECT2
-	ld b, 40 percent + 1 ; chance of poisoning
+	ld b, 40 percent + 1 ; chance of poisoning (Smog)
+	jr z, .sideEffectTest
+	cp POISON_SIDE_EFFECT3
+	ld b, 30 percent + 1 ; chance of poisoning (Sludge)
 	jr z, .sideEffectTest
 	push hl
 	push de

@@ -8,9 +8,9 @@ DEF PHYSICAL EQU const_value
 	const POISON       ; $03
 	const GROUND       ; $04
 	const ROCK         ; $05
-	const BIRD         ; $06
-	const BUG          ; $07
-	const GHOST        ; $08
+	const BUG          ; $06
+	const GHOST        ; $07
+	const STEEL        ; $08
 
 	const_next 20
 
@@ -22,5 +22,7 @@ DEF SPECIAL EQU const_value
 	const PSYCHIC_TYPE ; $18
 	const ICE          ; $19
 	const DRAGON       ; $1A
+	const DARK       	 ; $1B
+	const FAIRY        ; $1C
 
 DEF NUM_TYPES EQU const_value

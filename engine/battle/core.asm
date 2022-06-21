@@ -5441,6 +5441,12 @@ MoveHitTest:
 .doAccuracyCheck
 ; if the random number generated is greater than or equal to the scaled accuracy, the move misses
 ; note that this means that even the highest accuracy is still just a 255/256 chance, not 100%
+
+; this snippet is from Pokemon Crystal to fix the bug.
+	ld a, b
+	cp $FF ; Is the move accuracy 255?
+	ret z ; If so, skip calculation
+
 	call BattleRandom
 	cp b
 	jr nc, .moveMissed
