@@ -24,10 +24,10 @@ ViridianCityScript_1900b:
 	ret
 .gym_closed
 	ld a, [wYCoord]
-	cp 8
+	cp 9
 	ret nz
 	ld a, [wXCoord]
-	cp 32
+	cp 30
 	ret nz
 	ld a, $e
 	ldh [hSpriteIndexOrTextID], a
@@ -43,17 +43,19 @@ ViridianCityScript_1903d:
 	CheckEvent EVENT_GOT_POKEDEX
 	ret nz
 	ld a, [wYCoord]
-	cp 9
-	ret nz
+	cp 13
+	ret nz ; If stepping to y 13
 	ld a, [wXCoord]
-	cp 19
-	ret nz
+	cp 14
+	ret c ; If x > 14
+	cp 20
+	ret nc ; If x < 20
 	ld a, $5
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
-	call ViridianCityScript_190cf
+	call ViridianCityScript_190cf ; Prevent the player from moving upward
 	ld a, $3
 	ld [wViridianCityCurScript], a
 	ret

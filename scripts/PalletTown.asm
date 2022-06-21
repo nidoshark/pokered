@@ -145,6 +145,7 @@ PalletTownScript5:
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	ret z
 	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
+
 PalletTownScript6:
 	ret
 
