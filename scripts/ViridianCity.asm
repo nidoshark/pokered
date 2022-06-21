@@ -11,10 +11,10 @@ ViridianCity_ScriptPointers:
 	dw ViridianCityScript3
 
 ViridianCityScript0:
-	call ViridianCityScript_1900b
-	jp ViridianCityScript_1903d
+	call ViridianCityScript_GymClosed
+	jp ViridianCityScript_PrivateProperty
 
-ViridianCityScript_1900b:
+ViridianCityScript_GymClosed:
 	CheckEvent EVENT_VIRIDIAN_GYM_OPEN
 	ret nz
 	ld a, [wObtainedBadges]
@@ -24,7 +24,7 @@ ViridianCityScript_1900b:
 	ret
 .gym_closed
 	ld a, [wYCoord]
-	cp 9
+	cp 10
 	ret nz
 	ld a, [wXCoord]
 	cp 30
@@ -34,28 +34,28 @@ ViridianCityScript_1900b:
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
-	call ViridianCityScript_190cf
+	call ViridianCityScript_PlayerStepDown
 	ld a, $3
 	ld [wViridianCityCurScript], a
 	ret
 
-ViridianCityScript_1903d:
+ViridianCityScript_PrivateProperty:
 	CheckEvent EVENT_GOT_POKEDEX
 	ret nz
 	ld a, [wYCoord]
 	cp 13
-	ret nz ; If stepping to y 13
+	ret nz ; y = 13
 	ld a, [wXCoord]
 	cp 14
-	ret c ; If x > 14
+	ret c ; x > 14
 	cp 20
-	ret nc ; If x < 20
+	ret nc ; x < 20
 	ld a, $5
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
-	call ViridianCityScript_190cf ; Prevent the player from moving upward
+	call ViridianCityScript_PlayerStepDown
 	ld a, $3
 	ld [wViridianCityCurScript], a
 	ret
@@ -115,7 +115,7 @@ ViridianCityScript3:
 	ld [wViridianCityCurScript], a
 	ret
 
-ViridianCityScript_190cf:
+ViridianCityScript_PlayerStepDown:
 	call StartSimulatingJoypadStates
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -222,7 +222,7 @@ ViridianCityText5:
 	text_asm
 	ld hl, ViridianCityText_19191
 	call PrintText
-	call ViridianCityScript_190cf
+	call ViridianCityScript_PlayerStepDown
 	ld a, $3
 	ld [wViridianCityCurScript], a
 	jp TextScriptEnd

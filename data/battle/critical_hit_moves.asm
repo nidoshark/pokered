@@ -1,4 +1,5 @@
 HighCriticalMoves:
+; Attacks that have an increased critical-hit ratio
 	db KARATE_CHOP
 	db RAZOR_LEAF
 	db CRABHAMMER
